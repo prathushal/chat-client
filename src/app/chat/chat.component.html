@@ -1,0 +1,28 @@
+<div class="col-sm-6 info">
+  <h3>Chat Application</h3>
+    <div style="font-size: 12px; display: inline-block; vertical-align: top; border: 1px solid; border-color: black; box-sizing: border-box; ">
+      <div style="height: 755px;">
+        <div style="border-bottom: 1px solid black;padding-bottom: 5px;text-align: center;">
+          <b>Live Chat</b>
+        </div>
+        <div *ngFor="let message of messages">
+              <div *ngIf="message.message; else elseBlock" style="padding: 10px;">
+                  <div>
+                    <img src="assets/images/{{currentUser.avatar}}.png" alt="Avatar" class="avatar" height="50" width="50" style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;">
+                    <b style="padding-left: 10px; color: blue;">{{message.name}}</b> <b> posted on</b> {{ message.date | date:'shortTime' }}
+                  </div>
+                  <div style="padding-left: 40px;">{{message.message}}</div>
+              </div>
+              <ng-template #elseBlock>
+                  <div style="padding: 5px;">
+                      <i>{{message.name}} Joined </i>
+                  </div>    
+              </ng-template>
+        </div>
+      </div>
+      <div style="height: 25px;">
+          <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" placeholder="Type Message" style="padding-right: 100px;"/>
+          <button (click)="sendMessage()">Send</button>
+      </div>
+  </div>
+  </div>
